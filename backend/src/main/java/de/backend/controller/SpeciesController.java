@@ -3,10 +3,10 @@ package de.backend.controller;
 import de.backend.model.Species;
 import de.backend.service.SpeciesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/plants")
@@ -17,6 +17,18 @@ public class SpeciesController {
     @Autowired
     public SpeciesController(SpeciesService speciesService){
         this.speciesService = speciesService;
+    }
+
+    @GetMapping
+    public List<Species> listSpecies(@RequestParam Optional<String> search) {
+        if (search.isPresent()) {
+            return speciesService.search(search.get());
+        }
+        return speciesService.list();
+    }
+    @GetMapping("{id}")
+    public Species getSpecies(@PathVariable String id) {
+        return speciesService.findById(id);
     }
 
     @PostMapping()
