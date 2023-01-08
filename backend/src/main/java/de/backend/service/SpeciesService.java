@@ -1,5 +1,6 @@
 package de.backend.service;
 
+import de.backend.exception.NoSuchSpeciesException;
 import de.backend.model.Species;
 import de.backend.repo.SpeciesRepo;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,18 @@ public class SpeciesService {
         }
 
         return searchResultList;
+    }
+    public Species updateSpecies(String id, Species editedSpecies) throws NoSuchSpeciesException {
+        checkIfSpeciesExists(id);
+        return speciesRepo.save(editedSpecies);
+    }
+    private void checkIfSpeciesExists(String id) throws NoSuchSpeciesException {
+        for (Species species :
+                list()) {
+            if (species.getId().equals(id)) {
+                return;
+            }
+        }
+        throw new NoSuchSpeciesException("Species with id"+ id+" not found ");
     }
 }
