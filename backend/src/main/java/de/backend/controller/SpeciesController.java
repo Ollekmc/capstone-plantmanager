@@ -36,4 +36,9 @@ public class SpeciesController {
         return speciesService.addSpecies(species);
     }
 
+    @PutMapping("/{id}")
+    public Species update(@PathVariable String id, @RequestBody Species speciesRequest) throws Exception {
+        Species editSpecies = new Species(id,speciesRequest.getName(),speciesRequest.getFertilizerDemand(),speciesRequest.getWaterDemand(),speciesRequest.getHabitat(),speciesRequest.getSoil());
+        return speciesService.updateSpecies(id,editSpecies);
+    }
 }
