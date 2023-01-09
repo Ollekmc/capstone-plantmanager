@@ -7,6 +7,7 @@ export default function SpeciesApp(){
 
     return (
         <div>
+            <h2>SpeciesApp</h2>
             <AddSpecies addSpecies={addSpecies}/>
             <SpeciesGallery speciesPlural={speciesPlural}/>
         </div>
