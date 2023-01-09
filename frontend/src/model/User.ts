@@ -5,3 +5,8 @@ export type User = {
     name: string,
     plants: Plant[]
 }
+
+export type NewUser = {
+    name: string,
+    plants: Plant[]
+}
