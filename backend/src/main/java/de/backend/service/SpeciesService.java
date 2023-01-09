@@ -31,14 +31,14 @@ public class SpeciesService {
         throw new IllegalArgumentException("Id not found!");
     }
     public Species addSpecies(Species species) {
-        species.setId(idService.generateId());
+        species =new Species(idService.generateId(), species.name(),species.fertilizerDemand(),species.waterDemand(), species.habitat(),species.soil());
         return speciesRepo.save(species);
     }
 
     public List<Species> search(String s) {
         List<Species> searchResultList = new ArrayList<>();
         for (Species species: list()) {
-            if (species.getName().contains(s)){
+            if (species.name().contains(s)){
                 searchResultList.add(species);
             }
         }
@@ -52,7 +52,7 @@ public class SpeciesService {
     private void checkIfSpeciesExists(String id) throws NoSuchSpeciesException {
         for (Species species :
                 list()) {
-            if (species.getId().equals(id)) {
+            if (species.id().equals(id)) {
                 return;
             }
         }
