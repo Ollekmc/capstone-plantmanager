@@ -46,10 +46,10 @@ class SpeciesControllerTest {
 
         String content = response.getResponse().getContentAsString();
         Species result = objectMapper.readValue(content, Species.class);
-        Species expected = new Species (result.getId(), result.getName(), result.getWaterDemand(), result.getFertilizerDemand(), result.getHabitat(),result.getSoil());
+        Species expected = new Species (result.id(), result.name(), result.waterDemand(), result.fertilizerDemand(), result.habitat(),result.soil());
 
-        String resultString = result.getId()+result.getName()+result.getWaterDemand()+result.getFertilizerDemand()+result.getHabitat()+result.getSoil();
-        String expectedString = expected.getId()+expected.getName()+expected.getWaterDemand()+expected.getFertilizerDemand()+expected.getHabitat()+expected.getSoil();
+        String resultString = result.id()+result.name()+result.waterDemand()+result.fertilizerDemand()+result.habitat()+result.soil();
+        String expectedString = expected.id()+expected.name()+expected.waterDemand()+expected.fertilizerDemand()+expected.habitat()+expected.soil();
 
         assertEquals(resultString,expectedString);
 

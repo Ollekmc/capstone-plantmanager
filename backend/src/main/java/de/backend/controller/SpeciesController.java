@@ -1,5 +1,6 @@
 package de.backend.controller;
 
+import de.backend.exception.NoSuchSpeciesException;
 import de.backend.model.Species;
 import de.backend.service.SpeciesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,8 @@ public class SpeciesController {
     }
 
     @PutMapping("/{id}")
-    public Species update(@PathVariable String id, @RequestBody Species speciesRequest) throws Exception {
-        Species editSpecies = new Species(id,speciesRequest.getName(),speciesRequest.getFertilizerDemand(),speciesRequest.getWaterDemand(),speciesRequest.getHabitat(),speciesRequest.getSoil());
+    public Species update(@PathVariable String id, @RequestBody Species speciesRequest) throws NoSuchSpeciesException {
+        Species editSpecies = new Species(id,speciesRequest.name(),speciesRequest.fertilizerDemand(),speciesRequest.waterDemand(),speciesRequest.habitat(),speciesRequest.soil());
         return speciesService.updateSpecies(id,editSpecies);
     }
 }
