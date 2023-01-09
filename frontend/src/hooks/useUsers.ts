@@ -1,16 +1,28 @@
 import {NewUser, User} from "../model/User";
 import axios from "axios";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function useUsers() {
 
-    const [users, setUser] = useState<User[]>([])
+    const [users, setUsers] = useState<User[]>([])
+
+    useEffect(() => {
+        getUsers()
+    },[])
+
+    function getUsers(){
+    axios.get("api/users")
+        .then(response => {
+            setUsers(response.data)
+        })
+        .catch(console.error)
+    }
 
     function addUser(newUser: NewUser) {
         console.log(newUser)
         return axios.post("/api/users", newUser)
             .then(response => response.data)
-            .then((savedUser) => setUser(prevState => [...prevState, savedUser]))
+            .then((savedUser) => setUsers(prevState => [...prevState, savedUser]))
             .catch(console.error);
     }
     return {users, addUser}
