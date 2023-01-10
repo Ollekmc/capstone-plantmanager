@@ -19,6 +19,7 @@ public class SpeciesService {
         this.speciesRepo = speciesRepo;
         this.idService = idService;
     }
+
     public List<Species> list() {
         return speciesRepo.findAll();
     }
@@ -40,7 +41,6 @@ public class SpeciesService {
                 searchResultList.add(species);
             }
         }
-
         return searchResultList;
     }
     public Species updateSpecies(String id, Species editedSpecies) throws NoSuchSpeciesException {
