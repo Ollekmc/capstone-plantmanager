@@ -13,7 +13,6 @@ import java.util.Optional;
 public class SpeciesService {
 
     private final SpeciesRepo speciesRepo;
-
     private final IdService idService;
 
     public SpeciesService(SpeciesRepo speciesRepo, IdService idService) {
@@ -31,7 +30,6 @@ public class SpeciesService {
         throw new IllegalArgumentException("Id not found!");
     }
     public Species addSpecies(Species species) {
-        species =new Species(idService.generateId(), species.name(),species.fertilizerDemand(),species.waterDemand(), species.habitat(),species.soil());
         return speciesRepo.save(species);
     }
 
@@ -57,5 +55,9 @@ public class SpeciesService {
             }
         }
         throw new NoSuchSpeciesException("Species with id"+ id+" not found ");
+    }
+    public void delete(String id) {
+        Species species = findById(id);
+        speciesRepo.delete(species);
     }
 }

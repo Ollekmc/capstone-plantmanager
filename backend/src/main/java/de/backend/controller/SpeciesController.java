@@ -42,4 +42,7 @@ public class SpeciesController {
         Species editSpecies = new Species(id,speciesRequest.name(),speciesRequest.fertilizerDemand(),speciesRequest.waterDemand(),speciesRequest.habitat(),speciesRequest.soil());
         return speciesService.updateSpecies(id,editSpecies);
     }
+    @DeleteMapping("{id}")
+    public void deleteSpecies(@PathVariable String id){speciesService.delete(id);}
+
 }
