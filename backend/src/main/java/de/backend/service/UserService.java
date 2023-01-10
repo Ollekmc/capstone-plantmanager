@@ -2,6 +2,7 @@ package de.backend.service;
 
 import de.backend.model.User;
 import de.backend.repo.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,9 +12,9 @@ import java.util.List;
 public class UserService {
 
     private final UserRepo userRepo;
-
     private final IdService idService;
 
+    @Autowired
     public UserService(UserRepo userRepo, IdService idService) {
         this.userRepo = userRepo;
         this.idService = idService;

@@ -1,11 +1,13 @@
 package de.backend.model;
 
+import java.util.List;
+
 public class User {
     String id;
     String name;
-    Plant[] plants;
+    List<Plant> plants;
 
-    public User(String id, String name, Plant[] plants) {
+    public User(String id, String name, List<Plant> plants) {
         this.id = id;
         this.name = name;
         this.plants = plants;
@@ -27,11 +29,11 @@ public class User {
         this.name = name;
     }
 
-    public Plant[] getPlants() {
+    public List<Plant> getPlants() {
         return plants;
     }
 
-    public void setPlants(Plant[] plants) {
+    public void setPlants(List<Plant> plants) {
         this.plants = plants;
     }
 }
