@@ -51,20 +51,15 @@ class SpeciesControllerTest {
         Species result = objectMapper.readValue(content, Species.class);
         Species expected = new Species (result.id(), result.name(), result.waterDemand(), result.fertilizerDemand(), result.habitat(),result.soil());
 
-        String resultString = result.id()+result.name()+result.waterDemand()+result.fertilizerDemand()+result.habitat()+result.soil();
-        String expectedString = expected.id()+expected.name()+expected.waterDemand()+expected.fertilizerDemand()+expected.habitat()+expected.soil();
-
-        assertEquals(resultString,expectedString);
-
+        assertEquals(result,expected);
     }
     @Test
     @DirtiesContext
     void shouldReturnSpeciesList () throws Exception {
-     MvcResult response = mockMvc.perform(get("/api/plants"))
+    mockMvc.perform(get("/api/plants"))
              .andExpect(status().isOk())
              .andExpect(content().json("[]"))
              .andReturn();
-        System.out.println(response);
     }
     @Test
     void shouldDeleteSpeciesById() throws Exception {
