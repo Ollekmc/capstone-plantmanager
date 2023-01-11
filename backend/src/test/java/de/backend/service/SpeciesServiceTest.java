@@ -36,20 +36,6 @@ class SpeciesServiceTest {
         //THEN
         assertEquals(result, speciesToAdd);
     }
-    @Test
-    void testAddStudent() {
-        //GIVEN
-        Species studentToAdd = new Species("5", "Hans",5,5,Habitat.SEMISHADED,Soil.HUMIC);
-        when(speciesRepo.save(studentToAdd)).thenReturn(studentToAdd);
-        SpeciesService studentService = new SpeciesService(speciesRepo, idService);
-
-        //WHEN
-        Species actual = studentService.addSpecies(studentToAdd);
-
-        //THEN
-        assertThat(actual, is(studentToAdd));
-        verify(speciesRepo).save(studentToAdd);
-    }
 
     @Test
     void shouldReturnListOfSpecies() {
@@ -105,7 +91,6 @@ class SpeciesServiceTest {
                 species
 
         ));
-
     }
     @Test
     void should_Delete_By_Id() {

@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class UserServiceTest {
@@ -19,19 +20,17 @@ class UserServiceTest {
     List<Plant> plantList = new ArrayList<>();
 
     @Test
-    void should_Add_With_Random_Id() {
+    void should_Add_User() {
         //GIVEN
         User userToAdd = new User(null, "Morten",plantList);
-        User addedUser = new User("k0Lj4", "Skinny",plantList);
+        when(userRepo.save(userToAdd)).thenReturn(userToAdd);
+        UserService userService = new UserService(userRepo,idService);
 
-        when(idService.generateId()).thenReturn("k0lj4");
-        when(userRepo.save(addedUser)).thenReturn(addedUser);
-        //UserService userService = new UserService(userRepo, idService);
-        //WHEN
-        //User result = userService.addUser(userToAdd);
-        //THEN TODO redo test
+        User result = userService.addUser(userToAdd);
+
+        assertEquals(result, userToAdd);
+
         // assertThat(result, is(userToAdd));  TODO assert why not running w assertThat...
-        verify(userRepo).save(userToAdd);
     }
 
     @Test
