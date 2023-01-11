@@ -13,7 +13,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
@@ -54,4 +56,14 @@ class SpeciesControllerTest {
         assertEquals(resultString,expectedString);
 
     }
+    @Test
+    @DirtiesContext
+    void shouldReturnSpeciesList () throws Exception {
+     MvcResult response = mockMvc.perform(get("/api/plants"))
+             .andExpect(status().isOk())
+             .andExpect(content().json("[]"))
+             .andReturn();
+        System.out.println(response);
+    }
+
 }
