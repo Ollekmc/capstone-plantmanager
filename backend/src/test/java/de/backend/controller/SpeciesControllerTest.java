@@ -1,6 +1,8 @@
 package de.backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.backend.model.Habitat;
+import de.backend.model.Soil;
 import de.backend.model.Species;
 import de.backend.repo.SpeciesRepo;
 import org.junit.jupiter.api.Test;
@@ -13,8 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -64,6 +65,20 @@ class SpeciesControllerTest {
              .andExpect(content().json("[]"))
              .andReturn();
         System.out.println(response);
+    }
+    @Test
+    void shouldDeleteSpeciesById() throws Exception {
+        Species species = new Species("1","TestName",5,5, Habitat.SEMISHADED, Soil.HUMIC);
+        speciesRepo.save(species);
+       mockMvc.perform(delete("/api/plants/{id}", "1"))
+               .andExpect(status().isOk());
+    }
+    @Test
+    void shouldGetSpeciesById() throws Exception {
+        Species species = new Species("1","TestName",5,5, Habitat.SEMISHADED, Soil.HUMIC);
+        speciesRepo.save(species);
+        mockMvc.perform(get("/api/plants/{id}","1"))
+                .andExpect(status().isOk());
     }
 
 }
