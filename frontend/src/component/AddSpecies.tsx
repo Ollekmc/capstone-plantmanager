@@ -37,32 +37,39 @@ export default function AddSpecies(props: AddSpeciesProps) {
                 setHabitat(0);
                 setSoil(0)
             })
-        console.log(props.addSpecies)
     }
 
     return (
         <div>
-            <input type={"text"} placeholder={"Name"} value={name} onChange={onNameChange}/><p/>
-            <label htmlFor={"waterDemand"}>Water demand</label>
-            <input id={"waterDemand"} type={"range"} min={0} max={10} step={1} defaultValue={5} onChange={onWaterDemandChange}/><p/>
-            <label htmlFor={"fertilizerDemand"}>Fertilizer demand</label>
-            <input id={"fertilizerDemand"} type={"range"} min={0} max={10} step={1} defaultValue={5} onChange={onFertilizerDemandChange}/><p/>
-                <label htmlFor="habitat_type">Habitat Type:</label>
+            <label htmlFor={"name"}>
+                <input type={"text"} placeholder={"Name"} value={name} onChange={onNameChange}/><p/>
+            </label>
+            <label htmlFor={"waterDemand"}>Water demand
+                <input id={"waterDemand"} type={"range"} min={0} max={10} step={1} defaultValue={5} onChange={onWaterDemandChange}/><p/>
+            </label>
+
+            <label htmlFor={"fertilizerDemand"}>Fertilizer demand
+                <input id={"fertilizerDemand"} type={"range"} min={0} max={10} step={1} defaultValue={5} onChange={onFertilizerDemandChange}/><p/>
+            </label>
+
+            <label htmlFor="habitat_type">Habitat Type:
                 <select id="habitat_type" name="habitat_type" value={habitat} onChange={onHabitatChange}>
                         <option placeholder={"SUNNY"} value={0} >Sunny</option>
                         <option placeholder={"SHADED"} value={1} >Shaded</option>
                         <option placeholder={"SEMISHADED"} value={2} >Semishaded</option>
                 </select><p/>
-                <label htmlFor="soil_type">Soil Type:</label>
+            </label>
+
+            <label htmlFor="soil_type">Soil Type:
                 <select id="soil_type" name="soil_type" value={soil} onChange={onSoilChange}>
                     <option placeholder={"SANDY"} value={0} >Sandy</option>
                     <option placeholder={"HUMIC"} value={1} >Humic</option>
                     <option placeholder={"CLAYEY"} value={2} >Clayey</option>
                     <option placeholder={"SILTY"} value={2} >Silty</option>
                 </select><p/>
-                <button onClick={onClickSave}>Save new species</button>
+            </label>
+
+            <button onClick={onClickSave}>Save new species</button>
         </div>
     )
 }
-
-// TODO Reset Range to default after Submit
