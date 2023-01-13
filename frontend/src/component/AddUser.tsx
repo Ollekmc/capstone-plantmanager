@@ -17,7 +17,6 @@ export default function AddUser(props: AddUserProps){
             .then(() => {
                 setUsername("");
             })
-        console.log(props.addUser)
     }
 
     return (
