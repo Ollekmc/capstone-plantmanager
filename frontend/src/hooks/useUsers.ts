@@ -25,5 +25,14 @@ export default function useUsers() {
             .then((savedUser) => setUsers(prevState => [...prevState, savedUser]))
             .catch(console.error);
     }
-    return {users, addUser}
+    function removeUser(id: string) {
+        axios.delete(`/api/users/${id}`)
+            .then(() => {
+                setUsers(prevState => {
+                    return prevState.filter((user) => user.id !==id
+                    )
+                })
+            })
+    }
+    return {users, addUser, removeUser}
 }
