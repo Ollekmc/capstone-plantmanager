@@ -4,6 +4,7 @@ import UserCard from "./UserCard";
 
 type UserGalleryProps = {
     users: User[]
+    removeUser: (id:string) => void
 }
 
 export default function UserGallery(props: UserGalleryProps){
@@ -19,7 +20,7 @@ export default function UserGallery(props: UserGalleryProps){
             <input className={"user-gallery__search"} placeholder={"Search"} value={searchText} onChange={onSearchChange}/>
 
             <div className={"user-gallery"}>
-                {filteredUsers.map(user => <UserCard user={user} key={user.id}/>)}
+                {filteredUsers.map(user => <UserCard user={user} key={user.id} removeUser={props.removeUser}/>)}
 
             </div>
         </div>
