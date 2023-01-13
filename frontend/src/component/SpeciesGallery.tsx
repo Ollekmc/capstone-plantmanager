@@ -4,6 +4,7 @@ import SpeciesCard from "./SpeciesCard";
 
 type SpeciesGalleryProps = {
     speciesPlural: Species[]
+    removeSpecies: (id:string) => void
 }
 
 export default function SpeciesGallery(props: SpeciesGalleryProps){
@@ -21,7 +22,7 @@ export default function SpeciesGallery(props: SpeciesGalleryProps){
             <input className={"species-gallery__search"} placeholder={"Search"} value={searchText} onChange={onSearchChange}/>
 
             <div className={"species-gallery"}>
-                {filteredSpeciesPlural.map(species => <SpeciesCard species={species} key={species.id}/>)}
+                {filteredSpeciesPlural.map(species => <SpeciesCard species={species} key={species.id} removeSpecies={props.removeSpecies}/>)}
 
             </div>
         </div>
