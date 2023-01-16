@@ -1,30 +1,25 @@
-import {NewSpecies, Species} from "../model/Species";
-import axios from "axios";
 import {useEffect, useState} from "react";
+import {Species} from "../model/Species";
+import axios from "axios";
 
-export default  function useSpecies() {
-
-    const [speciesPlural, setSpeciesPlural] = useState<Species[]>([])
+function  useSpecies(id: string | undefined) {
+    const [species, setSpecies] = useState<Species>()
 
     useEffect(() => {
-        getSpeciesPlural()
+        if (id) {
+            getSpeciesById(id)
+        }
+        //eslint-disable-next-line
     },[])
 
-    function getSpeciesPlural(){
-        axios.get("api/plants")
-            .then(response => {
-                setSpeciesPlural(response.data)
+    function getSpeciesById(id: string) {
+        axios.get("/api/plants/"+id)
+            .then(response => response.data)
+            .then(data => {
+                setSpecies(data)
             })
             .catch(console.error)
     }
-
-    function addSpecies(newSpecies: NewSpecies) {
-        console.log(newSpecies)
-        return axios.post("/api/plants", newSpecies)
-            .then(response => response.data)
-            .then((savedSpecies) => setSpeciesPlural(prevState => [...prevState, savedSpecies]))
-            .catch(console.error);
-
-    }
-    return {speciesPlural , addSpecies}
+    return {species}
 }
+export default useSpecies;

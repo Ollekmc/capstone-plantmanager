@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SpeciesService {
@@ -24,12 +23,9 @@ public class SpeciesService {
         return speciesRepo.findAll();
     }
     public Species findById(String id) {
-        Optional<Species> optionalSpecies = speciesRepo.findById(id);
-        if (optionalSpecies.isPresent()) {
-            return optionalSpecies.get();
-        }
-        throw new IllegalArgumentException("Id not found!");
+        return speciesRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Id not found!"));
     }
+
     public Species addSpecies(Species species) {
         return speciesRepo.save(species);
     }
