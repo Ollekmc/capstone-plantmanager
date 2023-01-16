@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -34,5 +35,18 @@ public class UserService {
         }
 
         return searchResultList;
+    }
+
+    public User findById(String id) {
+        Optional<User> optionalUser = userRepo.findById(id);
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        }
+        throw new IllegalArgumentException("Id not found!");
+    }
+
+    public void delete(String id) {
+        User user = findById(id);
+        userRepo.delete(user);
     }
 }

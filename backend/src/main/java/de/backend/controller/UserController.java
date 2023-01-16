@@ -30,4 +30,12 @@ public class UserController {
         }
         return userService.list();
     }
+    @GetMapping("{id}")
+    public User getUser(@PathVariable String id) {
+        return userService.findById(id);
+    }
+    @DeleteMapping("{id}")
+    public void deleteUser(@PathVariable String id) {
+        userService.delete(id);}
+
 }

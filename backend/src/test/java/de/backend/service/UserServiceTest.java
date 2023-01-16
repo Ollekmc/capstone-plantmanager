@@ -1,15 +1,16 @@
 package de.backend.service;
 
-import de.backend.model.Plant;
-import de.backend.model.User;
+import de.backend.model.*;
 import de.backend.repo.UserRepo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -19,20 +20,18 @@ class UserServiceTest {
     private final UserRepo userRepo =mock(UserRepo.class);
     List<Plant> plantList = new ArrayList<>();
 
+
     @Test
-    void should_Add_User() {
+    void shouldAddUser() {
         //GIVEN
-        User userToAdd = new User(null, "Morten",plantList);
+        User userToAdd = new User("1","TestName",plantList);
         when(userRepo.save(userToAdd)).thenReturn(userToAdd);
         UserService userService = new UserService(userRepo,idService);
-
+        //WHEN
         User result = userService.addUser(userToAdd);
-
+        //THEN
         assertEquals(result, userToAdd);
-
-        // assertThat(result, is(userToAdd));  TODO assert why not running w assertThat...
     }
-
     @Test
     void should_Return_User_List () {
         //GIVEN
@@ -75,5 +74,30 @@ class UserServiceTest {
         assertThat(actual, containsInAnyOrder(
                 user
         ));
+    }
+    @Test
+    void should_Return_User_By_Id() {
+        //GIVEN
+        User user = new User("1","TestName",plantList);
+        when(userRepo.findById("1")).thenReturn(Optional.of(user));
+        UserService userService = new UserService(userRepo,idService);
+
+
+        //WHEN
+        User result = userService.findById("1");
+
+        //THEN
+        assertThat(result, is(user));
+    }
+    @Test
+    void should_Delete_User_By_Id() {
+        //GIVEN
+        User user = new User("1","TestName", plantList);
+        when(userRepo.findById("1")).thenReturn(Optional.of(user));
+        UserService userService = new UserService(userRepo,idService);
+        //WHEN
+        userService.delete("1");
+        //THEN
+        verify(userRepo).delete(user);
     }
 }
