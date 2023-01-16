@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 
 type UserCardProps = {
     user: User
-    removeUser: (id:string) => void
+    deleteUser: (id:string) => void
 }
 
 export default function UserCard(props: UserCardProps) {
@@ -15,7 +15,7 @@ export default function UserCard(props: UserCardProps) {
         navigate("/users/"+props.user.id)
     }
     function handleDelete(){
-        props.removeUser(props.user.id)
+        props.deleteUser(props.user.id)
     }
 
     return (
