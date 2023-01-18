@@ -1,0 +1,18 @@
+img {
+    width: 100px;
+    height: 125px;
+    align-items: center;
+    justify-content: center;
+}
+
+#image {
+    width: 100px;
+    height: 125px;
+    align-items: center;
+    justify-content: center;
+
+}
+.species-card {
+    width: 50%;
+    margin: 10px;
+}
