@@ -1,0 +1,8 @@
+.species-gallery {
+    background-color: #ffcdd2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 15px;
+    margin: 15px;
+}
